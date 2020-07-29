@@ -2,6 +2,7 @@ package com.ae.moviesapplicationupdate.base
 
 import android.app.Application
 import com.ae.moviesapplicationupdate.di.appModule
+import com.ae.moviesapplicationupdate.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.fragment.koin.fragmentFactory
@@ -16,7 +17,7 @@ class MainApplication: Application() {
             androidLogger()
             androidContext(this@MainApplication)
 
-            modules(appModule)
+            modules(listOf(appModule, viewModelModule))
         }
     }
 }
