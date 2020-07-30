@@ -1,10 +1,13 @@
 package com.ae.moviesapplicationupdate.di
 
 import com.ae.moviesapplicationupdate.BuildConfig
+import com.ae.moviesapplicationupdate.data.services.MoviesServices
+import com.ae.moviesapplicationupdate.ui.movies.viewmodel.MoviesViewModel
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -27,7 +30,7 @@ val appModule: Module = module {
         OkHttpClient.Builder()
             .addInterceptor(get<HttpLoggingInterceptor>())
             .addInterceptor { chain ->
-                val urlRequest: HttpUrl = chain.request().url()
+                val urlRequest: HttpUrl = chain.request().url
                 val url: HttpUrl = urlRequest.newBuilder()
                     .addQueryParameter("api_key", BuildConfig.API_KEY)
                     .build()
@@ -48,7 +51,12 @@ val appModule: Module = module {
             .baseUrl(BuildConfig.BASE_URL)
             .client(get<OkHttpClient>())
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
+
+    /**
+     * Provide MoviesServices
+     */
+    single<MoviesServices> { get<Retrofit>().create(MoviesServices::class.java) }
+
 }
