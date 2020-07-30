@@ -8,5 +8,9 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val viewModelModule: Module = module {
+
+    /**
+     * Provide MoviesViewModel
+     */
     viewModel<MoviesViewModel> { MoviesViewModel(get<MoviesServices>()) }
 }

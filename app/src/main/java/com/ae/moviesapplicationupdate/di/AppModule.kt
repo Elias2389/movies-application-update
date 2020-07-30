@@ -58,5 +58,4 @@ val appModule: Module = module {
      * Provide MoviesServices
      */
     single<MoviesServices> { get<Retrofit>().create(MoviesServices::class.java) }
-
 }
