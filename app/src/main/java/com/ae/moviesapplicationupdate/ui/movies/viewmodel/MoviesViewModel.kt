@@ -12,8 +12,19 @@ import retrofit2.Retrofit
 
 class MoviesViewModel(private val moviesServices: MoviesServices): ViewModel() {
 
-    val movies: LiveData<Resource<Response<MoviesResponse>>> = liveData(Dispatchers.IO) {
+    val popularMovies: LiveData<Resource<Response<MoviesResponse>>> = liveData(Dispatchers.IO) {
         val result = moviesServices.getPopularMovies()
+        emit(Resource.loading(data = null))
+
+        try {
+            emit(Resource.success(result))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
+        }
+    }
+
+    val latest: LiveData<Resource<Response<MoviesResponse>>> = liveData {
+        val result = moviesServices.getLatestMovie()
         emit(Resource.loading(data = null))
 
         try {

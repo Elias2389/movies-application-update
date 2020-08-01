@@ -14,4 +14,12 @@ interface MoviesServices {
      */
     @GET("popular")
     suspend fun getPopularMovies(): Response<MoviesResponse>
+
+    /**
+     * Method to get latest movies from API REST
+     *
+     * @return response with latest movie
+     */
+    @GET("upcoming")
+    suspend fun getLatestMovie(): Response<MoviesResponse>
 }
