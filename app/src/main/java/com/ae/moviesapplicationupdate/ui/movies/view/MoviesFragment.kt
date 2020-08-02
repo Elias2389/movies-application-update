@@ -1,6 +1,7 @@
 package com.ae.moviesapplicationupdate.ui.movies.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,7 +47,7 @@ class MoviesFragment : Fragment() {
         moviesViewModel.latest.observe(viewLifecycleOwner, Observer { resourse ->
             when(resourse.status) {
                 Status.LOADING -> {
-                    print("loading")
+                    Log.i("loading", "Loading")
                 }
                 Status.SUCCESS -> {
                     Glide.with(requireContext())
@@ -55,6 +56,7 @@ class MoviesFragment : Fragment() {
                         .into(moviesBinding?.latestImage!!)
 
                     resourse?.data?.body()?.results?.let { adapter.addItems(it) }
+
                 }
                 Status.ERROR -> {}
             }
@@ -62,12 +64,11 @@ class MoviesFragment : Fragment() {
         })
     }
 
-
     private fun getPopularMovies() {
         moviesViewModel.popularMovies.observe(viewLifecycleOwner, Observer { resourse ->
             when(resourse.status) {
                 Status.LOADING -> {
-                    print("loading")
+                    Log.i("loading", "Loading")
                 }
                 Status.SUCCESS -> {
                     resourse?.data?.body()?.results?.let {

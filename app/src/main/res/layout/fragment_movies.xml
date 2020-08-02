@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.movies.view.MoviesFragment">
 
-
     <ImageView
         android:id="@+id/latestImage"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
         android:id="@+id/popularMoviesContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
