@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.ae.moviesapplicationupdate.BuildConfig
 import com.ae.moviesapplicationupdate.R
 import com.ae.moviesapplicationupdate.common.dto.ResultsItem
 import com.ae.moviesapplicationupdate.databinding.ItemBinding
+
 
 import com.bumptech.glide.Glide
 
@@ -54,6 +57,15 @@ class PopularMoviesRecyclerView(private val context: Context):
                     .into(image)
             }
 
+            binding.cardContainer.setOnClickListener {view ->
+                goToDetail(resultsItem, view)
+            }
+
+
+        }
+
+        private fun goToDetail(resultsItem: ResultsItem, view: View) {
+            view.findNavController().navigate(R.id.action_moviesFragment_to_detailFragment)
         }
 
     }
