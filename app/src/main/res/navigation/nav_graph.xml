@@ -18,5 +18,9 @@
         android:id="@+id/detailFragment"
         android:name="com.ae.moviesapplicationupdate.ui.detail.view.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
 </navigation>

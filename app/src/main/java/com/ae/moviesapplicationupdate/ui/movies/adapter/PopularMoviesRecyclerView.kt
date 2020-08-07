@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.ae.moviesapplicationupdate.BuildConfig
 import com.ae.moviesapplicationupdate.R
 import com.ae.moviesapplicationupdate.common.dto.ResultsItem
 import com.ae.moviesapplicationupdate.databinding.ItemBinding
+import com.ae.moviesapplicationupdate.ui.movies.view.MoviesFragmentDirections
 
 
 import com.bumptech.glide.Glide
@@ -65,7 +66,11 @@ class PopularMoviesRecyclerView(private val context: Context):
         }
 
         private fun goToDetail(resultsItem: ResultsItem, view: View) {
-            view.findNavController().navigate(R.id.action_moviesFragment_to_detailFragment)
+            val infoShared = FragmentNavigatorExtras(
+                view to BuildConfig.BASE_URL_IMAGES + resultsItem.backdropPath)
+            val action = MoviesFragmentDirections
+                .actionMoviesFragmentToDetailFragment(BuildConfig.BASE_URL_IMAGES + resultsItem.backdropPath)
+            view.findNavController().navigate(action)
         }
 
     }
