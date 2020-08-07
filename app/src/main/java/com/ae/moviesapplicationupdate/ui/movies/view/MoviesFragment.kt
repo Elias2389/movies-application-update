@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.ae.moviesapplicationupdate.BuildConfig
+import com.ae.moviesapplicationupdate.R
 import com.ae.moviesapplicationupdate.common.dto.Status
 import com.ae.moviesapplicationupdate.databinding.FragmentMoviesBinding
 import com.ae.moviesapplicationupdate.ui.movies.adapter.PopularMoviesRecyclerView
@@ -40,6 +42,9 @@ class MoviesFragment : Fragment() {
         setupAdapter()
         getLatestMovie()
         getPopularMovies()
+
+        setExitToFullScreenTransition()
+        setReturnFromFullScreenTransition()
 
     }
 
@@ -92,6 +97,16 @@ class MoviesFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
             moviesBinding = null
+    }
+
+    private fun setExitToFullScreenTransition() {
+        exitTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.doggo_list_exit_transition)
+    }
+
+    private fun setReturnFromFullScreenTransition() {
+        reenterTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.doggo_list_return_transition)
     }
 
 }
