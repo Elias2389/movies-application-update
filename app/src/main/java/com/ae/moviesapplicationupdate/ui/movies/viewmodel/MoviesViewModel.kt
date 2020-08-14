@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 
 class MoviesViewModel(private val moviesServices: MoviesServices): ViewModel() {
 
-    val popularMovies: LiveData<Resource<Response<MoviesResponse>>> = liveData(Dispatchers.IO) {
+    val popularMovies: LiveData<Resource<MoviesResponse>> = liveData(Dispatchers.IO) {
         val result = moviesServices.getPopularMovies()
         emit(Resource.loading(data = null))
 
@@ -23,7 +23,7 @@ class MoviesViewModel(private val moviesServices: MoviesServices): ViewModel() {
         }
     }
 
-    val latest: LiveData<Resource<Response<MoviesResponse>>> = liveData {
+    val latest: LiveData<Resource<MoviesResponse>> = liveData {
         val result = moviesServices.getLatestMovie()
         emit(Resource.loading(data = null))
 
