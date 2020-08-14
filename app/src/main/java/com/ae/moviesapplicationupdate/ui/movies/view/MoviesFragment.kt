@@ -59,11 +59,11 @@ class MoviesFragment : Fragment() {
                 }
                 Status.SUCCESS -> {
                     Glide.with(requireContext())
-                        .load(BuildConfig.BASE_URL_IMAGES + resourse?.data?.body()?.results?.get(2)?.posterPath)
+                        .load(BuildConfig.BASE_URL_IMAGES + resourse?.data?.results?.get(2)?.posterPath)
                         .fitCenter()
                         .into(moviesBinding?.latestImage!!)
 
-                    resourse?.data?.body()?.results?.let { adapter.addItems(it) }
+                    resourse?.data?.results?.let { adapter.addItems(it) }
 
                 }
                 Status.ERROR -> {}
@@ -78,7 +78,7 @@ class MoviesFragment : Fragment() {
                     Log.i("loading", "Loading")
                 }
                 Status.SUCCESS -> {
-                    resourse?.data?.body()?.results?.let {
+                    resourse?.data?.results?.let {
                         adapter.addItems(it)
                         adapter.notifyDataSetChanged()
                     }
