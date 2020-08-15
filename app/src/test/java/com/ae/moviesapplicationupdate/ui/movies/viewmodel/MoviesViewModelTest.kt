@@ -76,7 +76,7 @@ class MoviesViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun getLatest() {
+    fun shouldGetLatest() {
         testCoroutineDispatcher.runBlockingTest {
             given(moviesServices.getLatestMovie()).willReturn(moviesResponse)
             viewModel.latest.observeForever(observer)
@@ -85,6 +85,21 @@ class MoviesViewModelTest {
 
             Mockito.verify(observer).onChanged(Resource.loading(data = null))
             Mockito.verify(observer).onChanged(Resource.success(moviesResponse))
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test(expected = Exception::class)
+    fun shouldTrowErrorPopularMovies() {
+        testCoroutineDispatcher.runBlockingTest {
+            given(moviesServices.getPopularMovies()).willThrow(Exception("Error"))
+            viewModel.popularMovies.observeForever(observer)
+
+            viewModel.popularMovies.getOrAwaitValue()
+
+            Mockito.verify(observer).onChanged(Resource.loading(data = null))
+            Mockito.verify(observer).onChanged(Resource.error(data = null, message = "Error Occurred!"))
+            assertSame(Exception::class, viewModel.popularMovies.getOrAwaitValue())
         }
     }
 
